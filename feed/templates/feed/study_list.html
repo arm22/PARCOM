@@ -1,0 +1,11 @@
+<div>
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
+
+{% for study in studies %}
+    <div>
+        <p>published: {{ study.published_date }}</p>
+        <h1><a href="">{{ study.title }}</a></h1>
+        <p>{{ study.abstract|linebreaks }}</p>
+    </div>
+{% endfor %}

@@ -3,4 +3,5 @@ from .models import Study
 
 # Create your views here.
 def study_list(request):
-    return render(request, 'feed/study_list.html', {})
+  studies = Study.objects.all()
+  return render(request, 'feed/study_list.html', {'studies': studies})

@@ -1,11 +1,13 @@
-<div>
-    <h1><a href="/">Django Girls Blog</a></h1>
-</div>
+{% extends 'feed/base.html' %}
 
-{% for study in studies %}
-    <div>
-        <p>published: {{ study.published_date }}</p>
-        <h1><a href="">{{ study.title }}</a></h1>
-        <p>{{ study.abstract|linebreaks }}</p>
+{% block content %}
+  {% for study in studys %}
+    <div class="study">
+      <div class="date">
+        {{ study.published_date }}
+      </div>
+      <h1><a href="{% url 'study_detail' pk=study.pk %}">{{ study.title }}</a></h1>
+      <p>{{ study.abstract|linebreaks }}</p>
     </div>
-{% endfor %}
+  {% endfor %}
+{% endblock %}

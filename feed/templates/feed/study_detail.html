@@ -1,0 +1,13 @@
+{% extends 'feed/base.html' %}
+
+{% block content %}
+    <div class="study">
+        {% if study.published_date %}
+            <div class="date">
+                {{ study.published_date }}
+            </div>
+        {% endif %}
+        <h1>{{ study.title }}</h1>
+        <p>{{ study.abstract|linebreaks }}</p>
+    </div>
+{% endblock %}

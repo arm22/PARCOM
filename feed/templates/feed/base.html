@@ -9,7 +9,13 @@
   </head>
   <body>
     <div class="page-header">
-      <h1><a href="/feed/">Django Girls Blog</a></h1>
+      {% if user.is_authenticated %}
+        <a href="{% url 'study_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+        <p class="top-menu">Hello {{ user.username }}<small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
+      {% else %}
+        <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+      {% endif %}
+      <h1><a href="{% url 'feed.views.study_list' %}">Django Girls</a></h1>
     </div>
     <div class="content container">
       <div class="row">

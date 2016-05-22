@@ -7,6 +7,7 @@
                 {{ study.published_date }}
             </div>
         {% endif %}
+        <a class="btn btn-default" href="{% url 'study_edit' pk=study.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <h1>{{ study.title }}</h1>
         <p>{{ study.abstract|linebreaks }}</p>
     </div>

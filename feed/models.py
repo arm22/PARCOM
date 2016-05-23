@@ -18,3 +18,12 @@ class Study(models.Model):
 
   def __str__(self):
     return self.title
+
+class Comment(models.Model):
+  study = models.ForeignKey('feed.Study', related_name='comments')
+  author = models.CharField(max_length=200)
+  text = models.TextField()
+  created_date = models.DateTimeField(default=timezone.now)
+
+  def __str__(self):
+    return self.text

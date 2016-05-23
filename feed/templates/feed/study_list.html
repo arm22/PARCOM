@@ -8,6 +8,7 @@
       </div>
       <h1><a href="{% url 'study_detail' pk=study.pk %}">{{ study.title }}</a></h1>
       <p>{{ study.abstract|linebreaks }}</p>
+      <a href="{% url 'study_detail' pk=study.pk %}">Comments: {{ study.comments.count }}</a>
     </div>
   {% endfor %}
 {% endblock %}

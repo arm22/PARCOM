@@ -1,14 +1,30 @@
 {% extends 'feed/base.html' %}
 
-{% block content %}
+  {% block content %}
     <div class="study">
-        {% if study.published_date %}
-            <div class="date">
-                {{ study.published_date }}
-            </div>
-        {% endif %}
-        <a class="btn btn-default" href="{% url 'study_edit' pk=study.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-        <h1>{{ study.title }}</h1>
-        <p>{{ study.abstract|linebreaks }}</p>
+      {% if study.published_date %}
+        <div class="date">
+          {{ study.published_date }}
+        </div>
+      {% endif %}
+      <a class="btn btn-default" href="{% url 'study_edit' pk=study.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+      <h1>{{ study.title }}</h1>
+      <p>{{ study.abstract|linebreaks }}</p>
     </div>
-{% endblock %}
+    <hr>
+    <div class="comments">
+      <a class="btn btn-default" href="{% url 'add_comment_to_study' pk=study.pk %}">Add comment</a>
+      {% for comment in study.comments.all %}
+        <div class="comment">
+          <div class="date">{{ comment.created_date }}</div>
+          {% if user.is_superuser %}
+            <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+          {% endif %}
+          <strong>{{ comment.author }}</strong>
+          <p>{{ comment.text|linebreaks }}</p>
+        </div>
+      {% empty %}
+      <p>No comments here yet :(</p>
+      {% endfor %}
+    </div>
+  {% endblock %}

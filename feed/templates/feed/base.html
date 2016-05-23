@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
   <head>
-    <title>Django Girls blog</title>
+    <title>CERTAIN Hub</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -9,21 +9,22 @@
   </head>
   <body>
     <div class="page-header">
-    {% if user.is_authenticated %}
-      <div>
-        <a href="{% url 'study_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-        <p class="top-menu">Hello {{ user.username }}<small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
-      </div>  
-    {% else %}
+      {% if user.is_authenticated %}
+<!--         <div>
+          <a href="{% url 'study_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+          <p class="top-menu">Hello {{ user.username }}<small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
+        </div>   -->
+      {% else %}
         <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
       {% endif %}
-      <ul class="nav nav-tabs navbar-right">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Menu 1</a></li>
-        <li><a href="#">Menu 2</a></li>
-        <li><a href="#">Menu 3</a></li>
-      </ul>
-      <h1><a href="{% url 'feed.views.study_list' %}"><img src="{% static 'images/header-logo.png' %}" alt="My image"/></a></h1>
+      <div role="navigation">
+        <ul class="nav nav-tabs navbar-right">
+          <li class="{% if '/feed/' in request.path %} active {% endif%}"><a href="{% url 'feed.views.study_list' %}">Home</a></li>
+          <li class="{% ifequal request.path '/notifications/'%} active {% endifequal%}"><a href="{% url 'feed.views.study_list' %}">Notifications</a></li>
+          <li class="{% ifequal request.path '/settings/'%} active {% endifequal%}"><a href="{% url 'feed.views.study_list' %}">Settings</a></li>
+        </ul>
+      </div>
+        <h1><a href="{% url 'feed.views.study_list' %}"><img src="{% static 'images/header-logo.png' %}" alt="My image"/></a></h1>
     </div>
     <div class="content container">
       <div class="row">

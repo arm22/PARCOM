@@ -3,11 +3,12 @@
 {% load bootstrap %}
 {% block content %}
 <form role="form" method="POST">
-    <legend>New Comment</legend>
+    <legend>Register</legend>
     {% csrf_token %}
     {{ form|bootstrap }}
     <div class="form-group">
-      <button type="submit" value="comment" class="btn btn-primary">Submit</button>
+      <button type="submit" value="register" class="btn btn-primary">Submit</button>
     </div>
 </form>
+<a href="/">Login</a>
 {% endblock %}

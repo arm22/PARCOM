@@ -1,38 +1,42 @@
 {% load staticfiles %}
 <html>
   <head>
-    <title>CERTAIN Hub</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <title>CERTAIN | Research Hub</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'css/feed.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
   </head>
   <body>
     <div class="page-header">
-      {% if user.is_authenticated %}
-<!--         <div>
-          <a href="{% url 'study_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-          <p class="top-menu">Hello {{ user.username }}<small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
-        </div>   -->
-      {% else %}
-        <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
-      {% endif %}
       <div role="navigation">
         <ul class="nav nav-tabs navbar-right">
-          <li class="{% if '/feed/' in request.path %} active {% endif%}"><a href="{% url 'feed.views.study_list' %}">Home</a></li>
-          <li class="{% ifequal request.path '/notifications/'%} active {% endifequal%}"><a href="{% url 'feed.views.study_list' %}">Notifications</a></li>
-          <li class="{% ifequal request.path '/settings/'%} active {% endifequal%}"><a href="{% url 'feed.views.study_list' %}">Settings</a></li>
+          <li class="{% ifequal request.path '/feed/' %} active {% endifequal %}"><a href="{% url 'feed.views.study_list' %}">Home</a></li>
+          <li class="{% if '/notifications/' in request.path %} active {% endif %}"><a href="{% url 'feed.views.notifications' %}">Notifications {% if user.is_authenticated %}<span class="label label-danger">2</span>{% endif %}</a></li>
+          <li class="{% if '/settings/' in request.path %} active {% endif %}"><a href="{% url 'feed.views.user_profile' %}">Settings</a></li>
         </ul>
       </div>
-        <h1><a href="{% url 'feed.views.study_list' %}"><img src="{% static 'images/header-logo.png' %}" alt="My image"/></a></h1>
+        <h1><a href="{% url 'feed.views.study_list' %}"><img src="{% static 'images/header-logo.png' %}" alt="Header Logo"/></a></h1>
     </div>
     <div class="content container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           {% block content %}
           {% endblock %}
         </div>
       </div>
     </div>
+    <footer>
+      <div class="footer-image-right"><a href="http://www.becertain.org/"><img src="{% static 'images/footer-logo.png' %}" alt="Footer Logo" height="50px" /></a></div>
+      <div class="footer-image-left"><a href="http://www.hcde.washington.edu/"><img src="{% static 'images/HCDE-logo.png' %}" alt="Footer Logo" height="50px" /></a></div>
+      <p class="text-muted">Copyright © 2016 CERTAIN. All rights reserved.</p>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>
 </html>

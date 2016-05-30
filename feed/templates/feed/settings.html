@@ -1,0 +1,15 @@
+{% extends 'feed/base.html' %}
+
+{% load bootstrap %}
+{% block content %}
+<form role="form" method="POST">
+    <legend>Settings</legend>
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="/logout"><button type="button" class="btn btn-warning">Logout</button></a>
+    </div>
+</form>
+
+{% endblock %}

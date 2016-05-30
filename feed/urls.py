@@ -8,4 +8,6 @@ urlpatterns = [
     url(r'^study/(?P<pk>\d+)/edit/$', views.study_edit, name='study_edit'),
     url(r'^study/(?P<pk>\d+)/comment/$', views.add_comment_to_study, name='add_comment_to_study'),
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
+    url(r'^notifications/$', views.notifications, name='notifications'),
+    url(r'^settings/$', views.user_profile, name='settings'),
 ]

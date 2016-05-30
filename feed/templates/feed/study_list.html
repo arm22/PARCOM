@@ -1,14 +1,19 @@
 {% extends 'feed/base.html' %}
 
 {% block content %}
-  {% for study in studys %}
-    <div class="study">
-      <h1><a href="{% url 'study_detail' pk=study.pk %}">{{ study.title }}</a></h1>
-      <div class="date">
-        {{ study.published_date }}
+    {% for study in studies %}
+      <div class="study">
+        <h1><a href="{% url 'study_detail' pk=study.pk %}">{{ study.title }}</a></h1>
+        <div class="date">
+          {{ study.published_date }}
+        </div>
+        <p>{{ study.abstract|truncatewords:100 }}</p>
+        <a href="{% url 'study_detail' pk=study.pk %}">Comments: {{ study.comments.count }}</a>
       </div>
-      <p>{{ study.abstract|linebreaks }}</p>
-      <a href="{% url 'study_detail' pk=study.pk %}">Comments: {{ study.comments.count }}</a>
-    </div>
-  {% endfor %}
+      {% empty %}
+        <div class="text-center">
+          <h1>Sorry, no studies matching your interests/condtions.</h1>
+          <p>Update your interests/conditions from <a href="{% url 'feed.views.user_profile' %}"">Settings</a></p>
+        </div>
+    {% endfor %}
 {% endblock %}

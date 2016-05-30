@@ -6,3 +6,4 @@ db.sqlite3
 .DS_Store
 database.json
 feed/static/admin
+resorce/stuff.py

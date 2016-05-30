@@ -9,8 +9,14 @@
   font-weight: bold;
 }
 
+html {
+  position: relative;
+  min-height: 100%
+}
+
 body {
   font-family: 'Humanist';
+  margin: 0 0 60px; /* bottom = footer height */
 }
 
 .page-header {
@@ -26,11 +32,20 @@ body {
 }
 
 .navbar-right {
-  margin-top: 105px;
+  margin-top: 104px;
+}
+
+.navbar-right li a {
+  color: #ddd;
+}
+
+.navbar-right li a:hover {
+  color: #555;
 }
 
 .content {
   margin-left: 40px;
+  padding-bottom: 15px
 }
 
 .date {
@@ -54,7 +69,7 @@ body {
 }
 
 .study {
-  margin-bottom: 70px;
+  margin-bottom: 30px;
 }
 
 .study h1 a, .study h1 a:visited {
@@ -67,4 +82,49 @@ body {
 
 h1, h2, h3, h4 {
   font-weight: bold;
+}
+
+.tags {
+  margin-top: 30px;
+}
+
+.tag-title {
+  font-weight: bold;
+}
+
+.tag {
+  color: blue;
+}
+
+.add-comment, .comment-delete {
+  float: right;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #252525;
+}
+
+.footer-image-right {
+  float: right;
+  padding: 5px;
+}
+
+.footer-image-left {
+  float: left;
+  padding: 5px;
+}
+
+.text-muted {
+  font-size: 8pt;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.stuff {
+  float: right;
 }

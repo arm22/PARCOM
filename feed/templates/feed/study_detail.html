@@ -2,7 +2,9 @@
 
   {% block content %}
     <div class="study">
-      <a class="btn btn-default" href="{% url 'study_edit' pk=study.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+      {% if user.is_superuser %}
+              <a class="btn btn-default" href="{% url 'study_edit' pk=study.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+      {% endif %}
       <h1>{{ study.title }}</h1>
       {% if study.published_date %}
         <div class="date">
@@ -10,18 +12,24 @@
         </div>
       {% endif %}
       <p>{{ study.abstract|linebreaks }}</p>
+      <div class="tags">
+        <span class="tag-title">Research Interests: </span>
+        {% for tag in tags %}
+          <button>{{ tag }}</button>
+        {% endfor %}
+      </div>
     </div>
     <hr>
     <div class="comments">
-      <a class="btn btn-default" href="{% url 'add_comment_to_study' pk=study.pk %}">Add comment</a>
+      <a class="btn btn-default add-comment" href="{% url 'add_comment_to_study' pk=study.pk %}">Add comment</a>
       {% for comment in study.comments.all %}
         <div class="comment">
-          <div class="date">{{ comment.created_date }}</div>
-          {% if user.is_superuser %}
-            <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-          {% endif %}
           <strong>{{ comment.author }}</strong>
-          <p>{{ comment.text|linebreaks }}</p>
+          <div class="date">{{ comment.created_date }}</div>
+            {{ comment.text|linebreaks }}
+            {% if user.is_superuser %}
+              <a class="btn btn-default comment-delete" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% endif %}
         </div>
       {% empty %}
       <p>No comments here yet :(</p>

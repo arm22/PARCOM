@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from taggit.managers import TaggableManager
+from django.contrib.auth.models import User
+from django.db.models import signals
 
 # Create your models here.
 class Study(models.Model):
@@ -27,3 +29,25 @@ class Comment(models.Model):
 
   def __str__(self):
     return self.text
+
+class UserProfile(models.Model):
+  user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+  age = models.IntegerField(null=True)
+  occupation = models.CharField(max_length=200)
+  about = models.TextField()
+  GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('NA', 'Not Applicable')
+  )
+  sex = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
+  interests = TaggableManager()
+
+  def __str__(self):
+    return self.user.username
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+signals.post_save.connect(create_user_profile, sender=User)
